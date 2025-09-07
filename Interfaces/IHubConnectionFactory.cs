@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.SignalR.Client;
 
-namespace ChatClient.Interfaces;
+namespace ChatClientService.Interfaces;
 
 public interface IHubConnectionFactory
 {

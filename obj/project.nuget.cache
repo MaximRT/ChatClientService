@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "imzH060p7mY=",
+  "dgSpecHash": "uc228o8NJYQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\MaxxPC\\RiderProjects\\ChatClient\\ChatClient.csproj",
+  "projectFilePath": "C:\\Users\\MaxxPC\\RiderProjects\\ChatClient\\ChatClientService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MaxxPC\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\9.0.8\\microsoft.aspnetcore.connections.abstractions.9.0.8.nupkg.sha512",
     "C:\\Users\\MaxxPC\\.nuget\\packages\\microsoft.aspnetcore.http.connections.client\\9.0.8\\microsoft.aspnetcore.http.connections.client.9.0.8.nupkg.sha512",

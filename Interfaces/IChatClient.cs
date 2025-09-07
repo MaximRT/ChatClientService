@@ -1,6 +1,6 @@
-namespace ChatClient.Interfaces;
+namespace ChatClientService.Interfaces;
 
 public interface IChatClient
 {
-    Task SendMessageAsync(string message);
+    Task SendMessageAsync(string name, string message);
 }

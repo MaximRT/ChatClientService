@@ -1878,9 +1878,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MaxxPC\\RiderProjects\\ChatClient\\ChatClient.csproj",
-      "projectName": "ChatClient",
-      "projectPath": "C:\\Users\\MaxxPC\\RiderProjects\\ChatClient\\ChatClient.csproj",
+      "projectUniqueName": "C:\\Users\\MaxxPC\\RiderProjects\\ChatClient\\ChatClientService.csproj",
+      "projectName": "ChatClientService",
+      "projectPath": "C:\\Users\\MaxxPC\\RiderProjects\\ChatClient\\ChatClientService.csproj",
       "packagesPath": "C:\\Users\\MaxxPC\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\MaxxPC\\RiderProjects\\ChatClient\\obj\\",
       "projectStyle": "PackageReference",
