@@ -5,13 +5,10 @@ namespace ChatClientService.Realizations;
 
 public class ChatClient : IChatClient
 {
-    private readonly IHubConnectionFactory _hubConnectionFactory;
-    
     private readonly HubConnection  _hubConnection;
     public ChatClient(IHubConnectionFactory hubConnectionFactory)
     {
-        _hubConnectionFactory = hubConnectionFactory;
-        _hubConnection = _hubConnectionFactory.CreateConnection();
+        _hubConnection = hubConnectionFactory.CreateConnection();
     }
 
     public async Task SendMessageAsync(string name, string message)
