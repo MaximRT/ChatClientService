@@ -5,50 +5,40 @@ namespace ChatClientService.Realizations;
 
 public class ChatClient : IChatClient
 {
+    private readonly IMessageHandler _messageHandler;
     private readonly HubConnection  _hubConnection;
-    public ChatClient(IHubConnectionFactory hubConnectionFactory)
+    private Task? _connectTask;
+    
+    
+    public ChatClient(IHubConnectionFactory hubConnectionFactory, IMessageHandler messageHandler)
     {
+        _messageHandler = messageHandler;
         _hubConnection = hubConnectionFactory.CreateConnection();
     }
 
     public async Task SendMessageAsync(string name, string message)
     {
+        await ConnectAsync();
         await _hubConnection.InvokeAsync("SendMessage", name, message);
     }
 
     private async Task ConnectAsync()
     {
+        _connectTask ??= InternalConnectAsync();
+
+        await _connectTask;
+    }
+
+    private async Task InternalConnectAsync()
+    {
         await _hubConnection.StartAsync();
         
-        _hubConnection.On<string, string>("ReceiveMessage", (name, message) =>
-        {
-            Console.WriteLine($"{name}: {message}");
-        });
+        _hubConnection.On<string, string>("ReceiveMessage",  _messageHandler.HandleMessage);
         
-        _hubConnection.Closed += async exception =>
-        {
-            if (exception is null)
-            {
-                Console.WriteLine("Connection closed without error.");
-            }
-            else
-            {
-                Console.WriteLine($"Connection closed due to an error: {exception}");
-            }
+        _hubConnection.Closed += async exception => await _messageHandler.HandleConnectionClosed(exception);
 
-            await Task.CompletedTask;
-        };
+        _hubConnection.Reconnecting += async exception => await _messageHandler.HandleReconnecting(exception);
 
-        _hubConnection.Reconnecting += async exception =>
-        {
-            Console.WriteLine($"Connection started reconnecting due to an error: {exception}");
-            await Task.CompletedTask;
-        };
-
-        _hubConnection.Reconnected += async connectionId =>
-        {
-            Console.WriteLine($"Connection successfully reconnected. The ConnectionId is now: {connectionId}");
-            await Task.CompletedTask;
-        };
+        _hubConnection.Reconnected += async connectionId => await _messageHandler.HandleReconnected(connectionId);
     }
 }

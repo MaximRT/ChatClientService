@@ -15,6 +15,8 @@ public class HubConnectionFactory : IHubConnectionFactory
 
     public HubConnection CreateConnection()
     {
+        var sd = _configuration["SignalR:PublicChatUrl"];
+        
         var connection = new HubConnectionBuilder()
             .WithUrl(_configuration["SignalR:PublicChatUrl"])
             .Build();
